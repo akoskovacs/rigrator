@@ -122,5 +122,5 @@ Rigrator::Cli.run
 
 ## Contributors
 
-- [juanedi](https://github.com/juanedi)  - creator, maintainer of micrate which is rigrator was forked from
+- [juanedi](https://github.com/juanedi)  - creator, maintainer of rigrator which is rigrator was forked from
 - [akoskovacs](https://github.com/akoskovacs)  - creator, maintainer of rigrator

@@ -1,9 +1,9 @@
 PREFIX=/usr/local
 INSTALL_DIR=$(PREFIX)/bin
-RIGRATOR_SYSTEM=$(INSTALL_DIR)/micrate
+RIGRATOR_SYSTEM=$(INSTALL_DIR)/rigrator
 
 OUT_DIR=$(CURDIR)/bin
-RIGRATOR=$(OUT_DIR)/micrate
+RIGRATOR=$(OUT_DIR)/rigrator
 RIGRATOR_SOURCES=$(shell find src/ -type f -name '*.cr')
 
 all: build
@@ -14,8 +14,8 @@ lib:
 	@shards install --production
 
 $(RIGRATOR): $(RIGRATOR_SOURCES) | $(OUT_DIR)
-	@echo "Building micrate in $@"
-	@crystal build -o $@ src/micrate-bin.cr -p --no-debug
+	@echo "Building rigrator in $@"
+	@crystal build -o $@ src/rigrator-bin.cr -p --no-debug
 
 $(OUT_DIR) $(INSTALL_DIR):
 	 @mkdir -p $@
