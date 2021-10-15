@@ -1,19 +1,19 @@
 PREFIX=/usr/local
 INSTALL_DIR=$(PREFIX)/bin
-MICRATE_SYSTEM=$(INSTALL_DIR)/micrate
+RIGRATOR_SYSTEM=$(INSTALL_DIR)/micrate
 
 OUT_DIR=$(CURDIR)/bin
-MICRATE=$(OUT_DIR)/micrate
-MICRATE_SOURCES=$(shell find src/ -type f -name '*.cr')
+RIGRATOR=$(OUT_DIR)/micrate
+RIGRATOR_SOURCES=$(shell find src/ -type f -name '*.cr')
 
 all: build
 
-build: lib $(MICRATE)
+build: lib $(RIGRATOR)
 
 lib:
 	@shards install --production
 
-$(MICRATE): $(MICRATE_SOURCES) | $(OUT_DIR)
+$(RIGRATOR): $(RIGRATOR_SOURCES) | $(OUT_DIR)
 	@echo "Building micrate in $@"
 	@crystal build -o $@ src/micrate-bin.cr -p --no-debug
 
@@ -21,22 +21,22 @@ $(OUT_DIR) $(INSTALL_DIR):
 	 @mkdir -p $@
 
 run:
-	$(MICRATE)
+	$(RIGRATOR)
 
 install: build | $(INSTALL_DIR)
-	@rm -f $(MICRATE_SYSTEM)
-	@cp $(MICRATE) $(MICRATE_SYSTEM)
+	@rm -f $(RIGRATOR_SYSTEM)
+	@cp $(RIGRATOR) $(RIGRATOR_SYSTEM)
 
 link: build | $(INSTALL_DIR)
-	@echo "Symlinking $(MICRATE) to $(MICRATE_SYSTEM)"
-	@ln -s $(MICRATE) $(MICRATE_SYSTEM)
+	@echo "Symlinking $(RIGRATOR) to $(RIGRATOR_SYSTEM)"
+	@ln -s $(RIGRATOR) $(RIGRATOR_SYSTEM)
 
 force_link: build | $(INSTALL_DIR)
-	@echo "Symlinking $(MICRATE) to $(MICRATE_SYSTEM)"
-	@ln -sf $(MICRATE) $(MICRATE_SYSTEM)
+	@echo "Symlinking $(RIGRATOR) to $(RIGRATOR_SYSTEM)"
+	@ln -sf $(RIGRATOR) $(RIGRATOR_SYSTEM)
 
 clean:
-	rm -rf $(MICRATE)
+	rm -rf $(RIGRATOR)
 
 distclean:
-	rm -rf $(MICRATE) .crystal .shards libs lib
+	rm -rf $(RIGRATOR) .crystal .shards libs lib

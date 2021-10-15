@@ -1,7 +1,7 @@
 require "db"
 require "./db/*"
 
-module Micrate
+module Rigrator
   module DB
     @@connection_url = ENV["DATABASE_URL"]?
 
@@ -27,7 +27,7 @@ module Micrate
     end
 
     def self.get_versions_last_first_order(db)
-      db.query_all "SELECT version_id, is_applied from micrate_db_version ORDER BY id DESC", as: {Int64, Bool}
+      db.query_all "SELECT version_id, is_applied from rigrator_db_version ORDER BY id DESC", as: {Int64, Bool}
     end
 
     def self.create_migrations_table(db)

@@ -1,8 +1,8 @@
 require "log"
 
-require "./micrate/*"
+require "./rigrator/*"
 
-module Micrate
+module Rigrator
   Log = ::Log.for(self)
 
   def self.db_dir
@@ -74,11 +74,11 @@ module Micrate
     filename = File.join(dir, "#{timestamp}_#{name}.sql")
 
     migration_template = "\
--- +micrate Up
+-- +rigrator Up
 -- SQL in section 'Up' is executed when this migration is applied
 
 
--- +micrate Down
+-- +rigrator Down
 -- SQL section 'Down' is executed when this migration is rolled back
 "
 

@@ -1,4 +1,4 @@
-module Micrate::DB
+module Rigrator::DB
   class Sqlite3 < Dialect
     def query_create_migrations_table(db)
       # The current sqlite drive implementation does not store timestamps in the same
@@ -6,7 +6,7 @@ module Micrate::DB
       #
       # As a workaround, we create timestamps locally so that the driver decides timestamp
       # formats when writing and reading.
-      db.exec("CREATE TABLE micrate_db_version (
+      db.exec("CREATE TABLE rigrator_db_version (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 version_id INTEGER NOT NULL,
                 is_applied INTEGER NOT NULL,
@@ -15,11 +15,11 @@ module Micrate::DB
     end
 
     def query_migration_status(migration, db)
-      db.query_all "SELECT tstamp, is_applied FROM micrate_db_version WHERE version_id=? ORDER BY tstamp DESC LIMIT 1", migration.version, as: {Time, Bool}
+      db.query_all "SELECT tstamp, is_applied FROM rigrator_db_version WHERE version_id=? ORDER BY tstamp DESC LIMIT 1", migration.version, as: {Time, Bool}
     end
 
     def query_record_migration(migration, is_applied, db)
-      db.exec("INSERT INTO micrate_db_version (version_id, is_applied, tstamp) VALUES (?, ?, ?);", migration.version, is_applied, Time.local)
+      db.exec("INSERT INTO rigrator_db_version (version_id, is_applied, tstamp) VALUES (?, ?, ?);", migration.version, is_applied, Time.local)
     end
   end
 end

@@ -1,17 +1,16 @@
-name: micrate
-version: 0.12.0
+name: rigrator
+version: 0.0.1
 crystal: ">= 0.36.1, < 2.0.0"
 
 authors:
-  - Juan Edi <jedi11235@gmail.com>
+  - Ákos Kovács <akoskovacs0@gmail.com>
 
 maintainers:
-  - Isaac Sloan <isaac@isaacsloan.com>
-  - Dru Jensen <drujensen@gmail.com>
+  - Ákos Kovács <akoskovacs0@gmail.com
 
 targets:
-  micrate:
-    main: src/micrate-bin.cr
+  rigrator:
+    main: src/rigrator-bin.cr
 
 dependencies:
   db:

@@ -1,6 +1,6 @@
-module Micrate
+module Rigrator
   class Migration
-    SQL_CMD_PREFIX = "-- +micrate "
+    SQL_CMD_PREFIX = "-- +rigrator "
 
     getter version
     getter name
@@ -21,7 +21,7 @@ module Micrate
       up_sections = 0
       down_sections = 0
 
-      buffer = Micrate::StatementBuilder.new
+      buffer = Rigrator::StatementBuilder.new
 
       statement_ended = false
       ignore_semicolons = false
@@ -70,13 +70,13 @@ module Micrate
     end
 
     def self.from_file(file_name)
-      full_path = File.join(Micrate.migrations_dir, file_name)
+      full_path = File.join(Rigrator.migrations_dir, file_name)
       version = file_name.split("_")[0].to_i64
       new(version, file_name, File.read(full_path))
     end
 
     def self.from_version(version)
-      file_name = Dir.entries(Micrate.migrations_dir)
+      file_name = Dir.entries(Rigrator.migrations_dir)
         .find { |name| name.starts_with? version.to_s }
         .not_nil!
       self.from_file(file_name)

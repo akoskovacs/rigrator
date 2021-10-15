@@ -1,4 +1,4 @@
-module Micrate::DB
+module Rigrator::DB
   abstract class Dialect
     abstract def query_create_migrations_table(db)
     abstract def query_migration_status(migration, db)

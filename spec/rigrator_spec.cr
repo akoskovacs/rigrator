@@ -1,10 +1,10 @@
 require "./spec_helper"
 
-Spectator.describe Micrate do
+Spectator.describe Rigrator do
   describe "dbversion" do
     it "returns 0 if table is empty" do
       rows = [] of {Int64, Bool}
-      Micrate.extract_dbversion(rows).should eq(0)
+      Rigrator.extract_dbversion(rows).should eq(0)
     end
 
     it "returns last applied migration" do
@@ -15,7 +15,7 @@ Spectator.describe Micrate do
         {20160101120000, true},
       ] of {Int64, Bool}
 
-      Micrate.extract_dbversion(rows).should eq(20160101140000)
+      Rigrator.extract_dbversion(rows).should eq(20160101140000)
     end
 
     it "ignores rolled back versions" do
@@ -25,26 +25,26 @@ Spectator.describe Micrate do
         {20160101120000, true},
       ] of {Int64, Bool}
 
-      Micrate.extract_dbversion(rows).should eq(20160101120000)
+      Rigrator.extract_dbversion(rows).should eq(20160101120000)
     end
   end
 
   describe "up" do
     context "going forward" do
       it "runs all migrations if starting from clean db" do
-        plan = Micrate.migration_plan(sample_migrations, 0, 20160523142316, :forward)
+        plan = Rigrator.migration_plan(sample_migrations, 0, 20160523142316, :forward)
         plan.should eq([20160523142308, 20160523142313, 20160523142316])
       end
 
       it "skips already performed migrations" do
-        plan = Micrate.migration_plan(sample_migrations, 20160523142308, 20160523142316, :forward)
+        plan = Rigrator.migration_plan(sample_migrations, 20160523142308, 20160523142316, :forward)
         plan.should eq([20160523142313, 20160523142316])
       end
     end
 
     context "going backwards" do
       it "skips already performed migrations" do
-        plan = Micrate.migration_plan(sample_migrations, 20160523142316, 20160523142308, :backwards)
+        plan = Rigrator.migration_plan(sample_migrations, 20160523142316, 20160523142308, :backwards)
         plan.should eq([20160523142316, 20160523142313])
       end
     end
@@ -57,8 +57,8 @@ Spectator.describe Micrate do
           20160523142316 => false,
         }
 
-        expect_raises(Micrate::UnorderedMigrationsException) do
-          Micrate.migration_plan(migrations, 20160523142313, 20160523142316, :forward)
+        expect_raises(Rigrator::UnorderedMigrationsException) do
+          Rigrator.migration_plan(migrations, 20160523142313, 20160523142316, :forward)
         end
       end
     end

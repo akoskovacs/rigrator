@@ -3,10 +3,10 @@ require "pg"
 require "mysql"
 require "sqlite3"
 
-require "./micrate"
+require "./rigrator"
 
-Log.define_formatter Micrate::CliFormat, "#{message}" \
+Log.define_formatter Rigrator::CliFormat, "#{message}" \
                                          "#{data(before: " -- ")}#{context(before: " -- ")}#{exception}"
-Log.setup(:info, Log::IOBackend.new(formatter: Micrate::CliFormat))
+Log.setup(:info, Log::IOBackend.new(formatter: Rigrator::CliFormat))
 
-Micrate::Cli.run
+Rigrator::Cli.run

@@ -1,0 +1,12 @@
+#! /usr/bin/env crystal
+
+#
+# To build a standalone command line client, require the
+# driver you wish to use and use `Rigrator::Cli`.
+#
+
+require "../src/rigrator"
+require "pg"
+
+Rigrator::DB.connection_url = "postgresql://..."
+Rigrator::Cli.run

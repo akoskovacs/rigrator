@@ -1,4 +1,4 @@
-module Micrate
+module Rigrator
   class StatementBuilder
     @buffer : String::Builder
 
